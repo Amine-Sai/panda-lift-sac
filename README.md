@@ -39,8 +39,7 @@ Select a mode with `--mode`:
 |---|---|---|
 | `native` | robosuite Lift with `reward_shaping=True` | Main baseline and demonstrated result. |
 | `sparse` | robosuite Lift with `reward_shaping=False` | Tests learning from the task's sparse reward. |
-| `pbrs` | `CustomLift` with sparse base reward and potential-based shaping at scale `1.0` | Explores an auxiliary distance/grasp/lift potential. |
-| `pbrs10` | Same PBRS formulation at scale `10.0` | Tests a larger shaping contribution. |
+| `pbrs` | `CustomLift` with sparse base reward and potential-based shaping at scale `1.0` by default | Explores an auxiliary distance/grasp/lift potential. |
 
 In `CustomLift`, the potential increases as the end effector approaches the cube and adds terms when the cube is grasped and raised. The shaping contribution uses the discounted potential difference. These variants are exploratory comparisons; the current results do not show them matching the native baseline under the tested budget.
 
@@ -72,6 +71,7 @@ Run one reward mode at a time from the repository root:
 python -m sac.train_sac --mode native --seed 0 --episodes 1000
 python -m sac.train_sac --mode sparse --seed 0 --episodes 1000
 python -m sac.train_sac --mode pbrs --seed 0 --episodes 1000
+
 ```
 
 `--episodes` is the **total target episode count**, not the number of extra episodes to add after resuming. The default in the training script is 2,000 episodes. Change `--seed` to launch a separate run; the output directory includes both the reward mode and seed.
