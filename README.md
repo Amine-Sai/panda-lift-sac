@@ -38,7 +38,8 @@ robot-arm/
 │   ├── networks.py             # Actor (Gaussian policy) and Twin Q-networks
 │   ├── buffer.py               # Standard replay buffer
 │   ├── train_sac.py            # Training script for Robosuite Lift
-│   └── test.py                 # Deterministic evaluation script
+│   ├── evaluate.py             # Evaluation helper (saves/restores RNG)
+│   └── test.py                 # Deterministic evaluation (takes a checkpoint path)
 │
 ├── sac_her/                    # SAC + HER implementation (sparse rewards)
 │   ├── her_buffer.py           # HER buffer with future goal resampling & state normalization
@@ -46,6 +47,11 @@ robot-arm/
 │   └── test_sac.py             # Deterministic evaluation script
 │
 └── requirements.txt            # Python dependencies
+```
+
+├── tests/
+│   ├── test_reward.py          # Reward regression test
+│   └── smoke.py               # Smoke test
 ```
 
 
@@ -82,14 +88,15 @@ python3 sac_her/test_sac.py
 
 ### 2. Training and Testing Standard SAC (Robosuite Lift)
 
-To train standard SAC with shaped rewards:
+To train standard SAC:
 ```bash
-python3 -m sac/train_sac.py
+python3 -m sac.train_sac --mode sparse --seed 0
 ```
+(modes: sparse, native, pbrs)
 
 To run deterministic evaluation:
 ```bash
-python3 -m sac/test_sac.py
+python3 -m sac.test runs_sac/sparse_s0/best.pt
 ```
 
 ---
@@ -101,8 +108,10 @@ To track training progress (Q-values, actor/critic losses, success rate, and tem
 ```bash
 tensorboard --logdir=runs
 # For Robosuite SAC logs:
-tensorboard --logdir=logs
+tensorboard --logdir=runs_sac
 ```
+
+Robosuite SAC runs write to `runs_sac/<mode>_s<seed>/` (`best.pt`, `latest.pt`, `buffer.npz`, `eval.csv`, `final_eval.json`); resume a run with `--resume`.
 
 ---
 
@@ -117,3 +126,4 @@ tensorboard --logdir=logs
 # robot-manipulation-rl
 # robot-manipulation-rl
 # robot-manipulation-rl
+# sac-learning
