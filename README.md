@@ -17,7 +17,9 @@ These figures are a snapshot of the current experiments, not a statistically con
 
 The root-level `curves.png` provides a quick view of evaluation success over environment steps:
 
-<img width="960" height="720" alt="curves" src="https://github.com/user-attachments/assets/6790824a-bcb8-4f04-b16a-5caf783458be" />
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/6790824a-bcb8-4f04-b16a-5caf783458be" alt="Evaluation success curves" width="650">
+</p>
 
 ## Task and observations
 
