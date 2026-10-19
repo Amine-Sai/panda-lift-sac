@@ -7,14 +7,12 @@ A reinforcement-learning project that trains a **Soft Actor-Critic (SAC)** agent
 The primary demonstration is the policy trained with robosuite's native shaped reward:
 
 <p align="center">
-  <video src="https://raw.githubusercontent.com/Amine-Sai/sac-learning/main/results/videos/native_s0.mp4" controls muted playsinline width="800">
+  <video src="https://raw.githubusercontent.com/Amine-Sai/sac-learning/main/results/videos/demonstration.mp4" controls muted playsinline width="800">
     Your browser may not display this video inline. Use the recording link below.
   </video>
 </p>
 
-**[Open the native-reward policy recording](results/videos/native_s0.mp4)**
-
-The video path above is relative to the repository root. Make sure `results/videos/native_s0.mp4` is committed to GitHub for the link and inline player to work for other visitors.
+**[Open the native-reward policy recording](results/videos/demonstration.mp4)**
 
 ## Current result
 
