@@ -1,0 +1,47 @@
+# Intentionally self-ignored: keep these rules local instead of publishing them.
+# Remove this first rule if you want to commit a shared .gitignore.
+/.gitignore
+
+# Python bytecode and tooling caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments and local secrets
+.venv/
+venv/
+env/
+ENV/
+.env
+.env.*
+!.env.example
+
+# Editors and operating-system files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Training outputs, checkpoints, replay buffers, and TensorBoard logs
+/runs_sac/
+/logs/
+/tmp/
+/checkpoints/
+/outputs/
+/wandb/
+*.pt
+*.pth
+*.ckpt
+*.npz
+events.out.tfevents.*
+
+# Ignore generated recordings except the main README demonstration.
+/results/videos/*
+!/results/videos/native_s0.mp4
