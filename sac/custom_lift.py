@@ -4,52 +4,32 @@ from robosuite.environments.manipulation.lift import Lift
 
 
 class CustomLift(Lift):
+    def __init__(self, *args, pbrs_gamma=0.99,  pbrs_scale=1,**kwargs):
+        self.pbrs_gamma = pbrs_gamma
+        self.pbrs_scale = pbrs_scale
+        self.last_shaping = 0.0
+        self._prev_phi = 0.0
+        
+        super().__init__(*args, **kwargs)
+
+    def reset(self):
+        obs = super().reset()
+        self._prev_phi = self._potential()
+        self.last_shaping = 0.0
+        return obs
+
+    def _potential(self):
+        cube_pos = self.sim.data.body_xpos[self.cube_body_id]
+        eef_pos = self.sim.data.site_xpos[self.robots[0].eef_site_id]
+        phi = 1.0 - np.tanh(10.0 * np.linalg.norm(eef_pos - cube_pos))
+        if self._check_grasp(gripper=self.robots[0].gripper, object_geoms=self.cube):
+            z_rest = self.model.mujoco_arena.table_offset[2] + 0.02
+            phi += 0.25 + np.clip((cube_pos[2] - z_rest) / 0.02, 0.0, 1.0)
+        return phi
 
     def reward(self, action=None):
-        reward = 0.0
-
-        if self._check_success():
-            reward = 2.25
-
-        elif self.reward_shaping:
-            # Reward approaching the cube
-            cube_pos = self.sim.data.body_xpos[self.cube_body_id]
-            gripper_site_pos = self.sim.data.site_xpos[
-                self.robots[0].eef_site_id
-            ]
-
-            dist = np.linalg.norm(gripper_site_pos - cube_pos)
-            reaching_reward = 1.0 - np.tanh(10.0 * dist)
-            reward += reaching_reward
-
-            # Reward grasping
-            grasped = self._check_grasp(
-                gripper=self.robots[0].gripper,
-                object_geoms=self.cube,
-            )
-
-            if grasped:
-                reward += 0.25
-
-                # Reward lifting after the cube is grasped
-                cube_height = cube_pos[2]
-                table_height = self.model.mujoco_arena.table_offset[2]
-
-                lift_height = max(0.0, cube_height - table_height)
-
-                lift_reward = np.clip(
-                    lift_height / 0.04,
-                    0.0,
-                    1.5,
-                )
-
-                reward += lift_reward
-
-        # Keep robosuite's original reward scaling
-        if self.reward_scale is not None:
-            reward *= self.reward_scale / 2.25
-
-        if self._check_success():
-            reward += 100.0
-
-        return reward
+        sparse = super().reward(action)
+        phi = self._potential()
+        self.last_shaping = self.pbrs_scale * (self.pbrs_gamma * phi - self._prev_phi)
+        self._prev_phi = phi
+        return sparse + self.last_shaping

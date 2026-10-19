@@ -1,4 +1,3 @@
-import os
 import torch as T
 import torch.nn.functional as F
 import torch.nn as nn
@@ -8,10 +7,8 @@ from torch.distributions.normal import Normal
 
 class CriticNetwork(nn.Module):
     def __init__(self, beta, input_dims, n_actions, fc1_dims=256, fc2_dims=256,
-                 name='critic', chkpt_dir='tmp/sac'):
+                 name='critic'):
         super(CriticNetwork, self).__init__()
-        self.checkpoint_dir = chkpt_dir
-        self.checkpoint_file = os.path.join(self.checkpoint_dir, name + '_sac')
 
         self.fc1 = nn.Linear(input_dims[0] + n_actions, fc1_dims)
         self.fc2 = nn.Linear(fc1_dims, fc2_dims)
@@ -26,20 +23,12 @@ class CriticNetwork(nn.Module):
         x = F.relu(self.fc2(x))
         return self.q(x)
 
-    def save_checkpoint(self):
-        os.makedirs(self.checkpoint_dir, exist_ok=True)
-        T.save(self.state_dict(), self.checkpoint_file)
-
-    def load_checkpoint(self):
-        self.load_state_dict(T.load(self.checkpoint_file))
 
 
 class ActorNetwork(nn.Module):
     def __init__(self, alpha, input_dims, max_action, n_actions, fc1_dims=256,
-                 fc2_dims=256, name='actor', chkpt_dir='tmp/sac'):
+                 fc2_dims=256, name='actor'):
         super(ActorNetwork, self).__init__()
-        self.checkpoint_dir = chkpt_dir
-        self.checkpoint_file = os.path.join(self.checkpoint_dir, name + '_sac')
         self.max_action = max_action
 
         self.fc1 = nn.Linear(*input_dims, fc1_dims)
@@ -78,10 +67,3 @@ class ActorNetwork(nn.Module):
         log_probs = log_probs.sum(dim=1, keepdim=True)
 
         return action, log_probs
-
-    def save_checkpoint(self):
-        os.makedirs(self.checkpoint_dir, exist_ok=True)
-        T.save(self.state_dict(), self.checkpoint_file)
-
-    def load_checkpoint(self):
-        self.load_state_dict(T.load(self.checkpoint_file))

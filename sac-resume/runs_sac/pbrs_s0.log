@@ -1,0 +1,212 @@
+[robosuite WARNING] No private macro file found! (__init__.py:7)
+[robosuite WARNING] It is recommended to use a private macro file (__init__.py:8)
+[robosuite WARNING] To setup, run: python /usr/local/lib/python3.13/dist-packages/robosuite/scripts/setup_macros.py (__init__.py:9)
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/usr/local/lib/python3.13/dist-packages/gym/spaces/box.py:127: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+  logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+Ep    0 | Steps     500 | Avg   -0.05 | Success 0.0%
+Step 5000 | Q1 0.05 | Q2 0.01 | LogP -2.63 | Alpha 0.2000
+Ep   10 | Steps    5500 | Avg   -0.16 | Success 0.0%
+Step 10000 | Q1 9.15 | Q2 9.15 | LogP -2.75 | Alpha 0.1213
+Ep   20 | Steps   10500 | Avg   -0.15 | Success 0.0%
+Step 15000 | Q1 12.51 | Q2 12.52 | LogP -2.78 | Alpha 0.0736
+Ep   30 | Steps   15500 | Avg   -0.13 | Success 0.0%
+Step 20000 | Q1 13.00 | Q2 13.00 | LogP -2.74 | Alpha 0.0446
+Ep   40 | Steps   20500 | Avg   -0.13 | Success 0.0%
+Step 25000 | Q1 12.07 | Q2 12.07 | LogP -2.74 | Alpha 0.0271
+Ep   50 | Steps   25500 | Avg   -0.14 | Success 0.0%
+Step 30000 | Q1 10.57 | Q2 10.58 | LogP -2.72 | Alpha 0.0164
+Ep   60 | Steps   30500 | Avg   -0.15 | Success 0.0%
+Step 35000 | Q1 8.92 | Q2 8.92 | LogP -2.74 | Alpha 0.0100
+Ep   70 | Steps   35500 | Avg   -0.20 | Success 0.0%
+Step 40000 | Q1 7.35 | Q2 7.35 | LogP -2.69 | Alpha 0.0060
+Ep   80 | Steps   40500 | Avg   -0.21 | Success 1.2%
+Step 45000 | Q1 5.94 | Q2 5.94 | LogP -2.48 | Alpha 0.0037
+Ep   90 | Steps   45500 | Avg   -0.23 | Success 1.1%
+Step 50000 | Q1 4.77 | Q2 4.77 | LogP -2.45 | Alpha 0.0022
+Ep  100 | Steps   50500 | Avg   -0.24 | Success 1.0%
+Step 55000 | Q1 3.78 | Q2 3.78 | LogP -2.13 | Alpha 0.0014
+Ep  110 | Steps   55500 | Avg   -0.30 | Success 1.0%
+Step 60000 | Q1 3.00 | Q2 3.00 | LogP -0.22 | Alpha 0.0008
+Ep  120 | Steps   60500 | Avg   -0.44 | Success 1.0%
+Step 65000 | Q1 2.45 | Q2 2.46 | LogP 3.50 | Alpha 0.0006
+Ep  130 | Steps   65500 | Avg    1.07 | Success 2.0%
+Step 70000 | Q1 2.27 | Q2 2.27 | LogP 5.27 | Alpha 0.0007
+Ep  140 | Steps   70500 | Avg    1.00 | Success 2.0%
+Step 75000 | Q1 2.44 | Q2 2.44 | LogP 4.84 | Alpha 0.0011
+Ep  150 | Steps   75500 | Avg    0.95 | Success 2.0%
+Step 80000 | Q1 3.33 | Q2 3.36 | LogP 5.77 | Alpha 0.0017
+Ep  160 | Steps   80500 | Avg    0.91 | Success 2.0%
+Step 85000 | Q1 3.26 | Q2 3.23 | LogP 5.45 | Alpha 0.0028
+Ep  170 | Steps   85500 | Avg    0.92 | Success 2.0%
+Step 90000 | Q1 5.81 | Q2 5.84 | LogP 5.28 | Alpha 0.0043
+Ep  180 | Steps   90500 | Avg    0.83 | Success 1.0%
+Step 95000 | Q1 7.08 | Q2 7.09 | LogP 3.88 | Alpha 0.0059
+Ep  190 | Steps   95500 | Avg    0.78 | Success 1.0%
+Step 100000 | Q1 9.44 | Q2 9.39 | LogP 4.03 | Alpha 0.0071
+Ep  200 | Steps  100500 | Avg    0.72 | Success 1.0%
+Step 105000 | Q1 9.26 | Q2 9.18 | LogP 3.64 | Alpha 0.0074
+Ep  210 | Steps  105500 | Avg    0.68 | Success 1.0%
+Step 110000 | Q1 12.85 | Q2 12.83 | LogP 3.87 | Alpha 0.0068
+Ep  220 | Steps  110500 | Avg    0.75 | Success 1.0%
+Step 115000 | Q1 12.57 | Q2 12.60 | LogP 4.51 | Alpha 0.0076
+Ep  230 | Steps  115500 | Avg   -0.85 | Success 0.0%
+Step 120000 | Q1 16.79 | Q2 16.80 | LogP 3.97 | Alpha 0.0092
+Ep  240 | Steps  120500 | Avg   -0.92 | Success 0.0%
+Step 125000 | Q1 15.79 | Q2 15.76 | LogP 4.25 | Alpha 0.0091
+Ep  250 | Steps  125500 | Avg   -0.97 | Success 0.0%
+Step 130000 | Q1 23.93 | Q2 23.87 | LogP 5.70 | Alpha 0.0129
+Ep  260 | Steps  130500 | Avg    0.48 | Success 1.0%
+Step 135000 | Q1 33.96 | Q2 34.00 | LogP 3.20 | Alpha 0.0146
+Ep  270 | Steps  135500 | Avg    0.43 | Success 1.0%
+Step 140000 | Q1 30.69 | Q2 30.59 | LogP 4.05 | Alpha 0.0176
+Ep  280 | Steps  140500 | Avg    0.44 | Success 1.0%
+Step 145000 | Q1 27.88 | Q2 27.92 | LogP 3.82 | Alpha 0.0194
+Ep  290 | Steps  145500 | Avg    2.37 | Success 2.0%
+Step 150000 | Q1 39.04 | Q2 38.80 | LogP 4.29 | Alpha 0.0209
+Ep  300 | Steps  150500 | Avg    2.36 | Success 2.0%
+Step 155000 | Q1 37.77 | Q2 37.43 | LogP 3.91 | Alpha 0.0254
+Ep  310 | Steps  155500 | Avg   10.43 | Success 4.0%
+Step 160000 | Q1 43.92 | Q2 43.88 | LogP 3.79 | Alpha 0.0273
+Ep  320 | Steps  160500 | Avg   10.45 | Success 4.0%
+Step 165000 | Q1 43.04 | Q2 42.82 | LogP 3.34 | Alpha 0.0280
+Ep  330 | Steps  165500 | Avg   10.44 | Success 4.0%
+Step 170000 | Q1 64.63 | Q2 64.56 | LogP 4.53 | Alpha 0.0325
+Ep  340 | Steps  170500 | Avg   10.55 | Success 4.0%
+Step 175000 | Q1 47.45 | Q2 47.53 | LogP 3.37 | Alpha 0.0329
+Ep  350 | Steps  175500 | Avg   10.59 | Success 4.0%
+Step 180000 | Q1 59.99 | Q2 59.92 | LogP 3.99 | Alpha 0.0362
+Ep  360 | Steps  180500 | Avg    9.15 | Success 4.0%
+Step 185000 | Q1 71.68 | Q2 71.88 | LogP 3.77 | Alpha 0.0328
+Ep  370 | Steps  185500 | Avg    9.24 | Success 6.0%
+Step 190000 | Q1 64.30 | Q2 64.55 | LogP 4.03 | Alpha 0.0308
+Ep  380 | Steps  190500 | Avg    9.23 | Success 6.0%
+Step 195000 | Q1 71.80 | Q2 71.97 | LogP 3.94 | Alpha 0.0264
+Ep  390 | Steps  195500 | Avg    7.29 | Success 5.0%
+Step 200000 | Q1 58.47 | Q2 58.91 | LogP 4.02 | Alpha 0.0270
+Ep  400 | Steps  200500 | Avg    7.28 | Success 5.0%
+Step 205000 | Q1 57.17 | Q2 57.43 | LogP 4.11 | Alpha 0.0261
+Ep  410 | Steps  205500 | Avg   -0.79 | Success 3.0%
+Step 210000 | Q1 48.26 | Q2 48.27 | LogP 4.00 | Alpha 0.0242
+Ep  420 | Steps  210500 | Avg   -0.83 | Success 3.0%
+Step 215000 | Q1 49.41 | Q2 49.58 | LogP 3.29 | Alpha 0.0236
+Ep  430 | Steps  215500 | Avg   -0.86 | Success 3.0%
+Step 220000 | Q1 50.06 | Q2 49.63 | LogP 3.98 | Alpha 0.0236
+Ep  440 | Steps  220500 | Avg   -0.95 | Success 3.0%
+Step 225000 | Q1 46.82 | Q2 46.46 | LogP 3.45 | Alpha 0.0244
+Ep  450 | Steps  225500 | Avg   -0.99 | Success 3.0%
+Step 230000 | Q1 41.76 | Q2 41.90 | LogP 4.03 | Alpha 0.0221
+Ep  460 | Steps  230500 | Avg   -0.99 | Success 2.0%
+Step 235000 | Q1 49.17 | Q2 49.12 | LogP 4.15 | Alpha 0.0215
+Ep  470 | Steps  235500 | Avg   -1.10 | Success 0.0%
+Step 240000 | Q1 39.76 | Q2 39.65 | LogP 4.24 | Alpha 0.0208
+Ep  480 | Steps  240500 | Avg   -1.05 | Success 0.0%
+Step 245000 | Q1 44.76 | Q2 44.84 | LogP 4.71 | Alpha 0.0209
+Ep  490 | Steps  245500 | Avg    3.29 | Success 2.0%
+Step 250000 | Q1 36.73 | Q2 36.88 | LogP 3.66 | Alpha 0.0217
+Ep  500 | Steps  250500 | Avg    4.43 | Success 3.0%
+Step 255000 | Q1 48.11 | Q2 48.16 | LogP 3.95 | Alpha 0.0220
+Ep  510 | Steps  255500 | Avg    5.32 | Success 4.0%
+Step 260000 | Q1 41.48 | Q2 41.72 | LogP 4.14 | Alpha 0.0229
+Ep  520 | Steps  260500 | Avg    5.31 | Success 4.0%
+Step 265000 | Q1 33.96 | Q2 34.07 | LogP 4.26 | Alpha 0.0200
+Ep  530 | Steps  265500 | Avg    5.33 | Success 4.0%
+Step 270000 | Q1 34.21 | Q2 34.06 | LogP 3.68 | Alpha 0.0219
+Ep  540 | Steps  270500 | Avg    5.36 | Success 4.0%
+Step 275000 | Q1 44.25 | Q2 44.34 | LogP 3.69 | Alpha 0.0235
+Ep  550 | Steps  275500 | Avg    5.29 | Success 4.0%
+Step 280000 | Q1 41.21 | Q2 41.30 | LogP 4.44 | Alpha 0.0218
+Ep  560 | Steps  280500 | Avg    6.72 | Success 5.0%
+Step 285000 | Q1 47.18 | Q2 47.38 | LogP 3.35 | Alpha 0.0218
+Ep  570 | Steps  285500 | Avg    8.04 | Success 6.0%
+Step 290000 | Q1 41.50 | Q2 41.36 | LogP 4.05 | Alpha 0.0223
+Ep  580 | Steps  290500 | Avg    8.03 | Success 6.0%
+Step 295000 | Q1 38.16 | Q2 38.47 | LogP 4.45 | Alpha 0.0217
+Ep  590 | Steps  295500 | Avg    4.05 | Success 5.0%
+Step 300000 | Q1 50.57 | Q2 50.57 | LogP 4.06 | Alpha 0.0217
+Ep  600 | Steps  300500 | Avg    3.57 | Success 5.0%
+Step 305000 | Q1 44.43 | Q2 44.14 | LogP 4.20 | Alpha 0.0242
+Ep  610 | Steps  305500 | Avg    2.72 | Success 4.0%
+Step 310000 | Q1 48.00 | Q2 47.95 | LogP 4.72 | Alpha 0.0247
+Ep  620 | Steps  310500 | Avg    2.73 | Success 4.0%
+Step 315000 | Q1 38.80 | Q2 38.91 | LogP 4.44 | Alpha 0.0256
+Ep  630 | Steps  315500 | Avg    2.75 | Success 4.0%
+Step 320000 | Q1 37.66 | Q2 37.41 | LogP 4.56 | Alpha 0.0259
+Ep  640 | Steps  320500 | Avg    2.78 | Success 4.0%
+Step 325000 | Q1 45.42 | Q2 45.47 | LogP 3.60 | Alpha 0.0262
+Ep  650 | Steps  325500 | Avg    2.82 | Success 4.0%
+Step 330000 | Q1 37.03 | Q2 37.09 | LogP 4.22 | Alpha 0.0264
+Ep  660 | Steps  330500 | Avg    1.43 | Success 4.0%
+Step 335000 | Q1 37.02 | Q2 36.96 | LogP 3.98 | Alpha 0.0275
+Ep  670 | Steps  335500 | Avg    0.13 | Success 3.0%
+Step 340000 | Q1 46.64 | Q2 46.19 | LogP 4.41 | Alpha 0.0288
+Ep  680 | Steps  340500 | Avg    0.09 | Success 3.0%
+Step 345000 | Q1 41.41 | Q2 41.61 | LogP 4.67 | Alpha 0.0313
+Ep  690 | Steps  345500 | Avg   -0.25 | Success 2.0%
+Step 350000 | Q1 47.29 | Q2 47.04 | LogP 4.25 | Alpha 0.0317
+Ep  700 | Steps  350500 | Avg   -0.85 | Success 2.0%
+Step 355000 | Q1 34.21 | Q2 34.60 | LogP 4.12 | Alpha 0.0312
+Ep  710 | Steps  355500 | Avg    3.53 | Success 4.0%
+Step 360000 | Q1 52.22 | Q2 52.24 | LogP 3.63 | Alpha 0.0295
+Ep  720 | Steps  360500 | Avg    7.30 | Success 5.0%
+Step 365000 | Q1 46.64 | Q2 46.62 | LogP 4.51 | Alpha 0.0309
+Ep  730 | Steps  365500 | Avg    8.18 | Success 6.0%
+Step 370000 | Q1 42.12 | Q2 42.22 | LogP 3.83 | Alpha 0.0291
+Ep  740 | Steps  370500 | Avg    8.21 | Success 7.0%
+Step 375000 | Q1 42.89 | Q2 42.16 | LogP 4.50 | Alpha 0.0307
+Ep  750 | Steps  375500 | Avg    8.22 | Success 7.0%
+Step 380000 | Q1 44.52 | Q2 44.33 | LogP 4.45 | Alpha 0.0298
+Ep  760 | Steps  380500 | Avg    8.38 | Success 7.0%
+Step 385000 | Q1 47.12 | Q2 46.92 | LogP 3.84 | Alpha 0.0314
+Ep  770 | Steps  385500 | Avg    8.30 | Success 7.0%
+Step 390000 | Q1 51.24 | Q2 51.51 | LogP 3.71 | Alpha 0.0349
+Ep  780 | Steps  390500 | Avg    8.44 | Success 9.0%
+Step 395000 | Q1 49.17 | Q2 48.90 | LogP 3.78 | Alpha 0.0364
+Ep  790 | Steps  395500 | Avg    8.38 | Success 9.0%
+Step 400000 | Q1 37.39 | Q2 37.02 | LogP 3.26 | Alpha 0.0328
+Ep  800 | Steps  400500 | Avg    8.54 | Success 10.0%
+Step 405000 | Q1 63.09 | Q2 62.89 | LogP 4.92 | Alpha 0.0329
+Ep  810 | Steps  405500 | Avg    6.83 | Success 10.0%
+Step 410000 | Q1 46.34 | Q2 46.69 | LogP 4.03 | Alpha 0.0320
+Ep  820 | Steps  410500 | Avg    6.59 | Success 10.0%
+Step 415000 | Q1 35.42 | Q2 35.38 | LogP 4.07 | Alpha 0.0291
+Ep  830 | Steps  415500 | Avg    5.65 | Success 9.0%
+Step 420000 | Q1 40.97 | Q2 40.36 | LogP 3.79 | Alpha 0.0285
+Ep  840 | Steps  420500 | Avg    5.58 | Success 8.0%
+Step 425000 | Q1 38.39 | Q2 38.94 | LogP 4.21 | Alpha 0.0264
+Ep  850 | Steps  425500 | Avg    5.55 | Success 8.0%
+Step 430000 | Q1 34.93 | Q2 35.10 | LogP 3.93 | Alpha 0.0238
+Ep  860 | Steps  430500 | Avg    5.28 | Success 8.0%
+Step 435000 | Q1 37.05 | Q2 36.96 | LogP 3.77 | Alpha 0.0243
+Ep  870 | Steps  435500 | Avg    5.57 | Success 9.0%
+Step 440000 | Q1 34.15 | Q2 34.50 | LogP 4.20 | Alpha 0.0235
+Ep  880 | Steps  440500 | Avg    5.47 | Success 8.0%
+Step 445000 | Q1 23.77 | Q2 23.70 | LogP 4.13 | Alpha 0.0244
+Ep  890 | Steps  445500 | Avg    5.55 | Success 8.0%
+Step 450000 | Q1 30.87 | Q2 30.61 | LogP 3.75 | Alpha 0.0257
+Ep  900 | Steps  450500 | Avg    5.44 | Success 7.0%
+Step 455000 | Q1 27.42 | Q2 27.50 | LogP 3.99 | Alpha 0.0238
+Ep  910 | Steps  455500 | Avg    2.77 | Success 5.0%
+Step 460000 | Q1 30.85 | Q2 30.87 | LogP 4.23 | Alpha 0.0259
+Ep  920 | Steps  460500 | Avg   -0.69 | Success 5.0%
+Step 465000 | Q1 36.06 | Q2 35.75 | LogP 4.57 | Alpha 0.0283
+Ep  930 | Steps  465500 | Avg   -0.63 | Success 5.0%
+Step 470000 | Q1 34.19 | Q2 34.37 | LogP 2.64 | Alpha 0.0290
+Ep  940 | Steps  470500 | Avg   -0.39 | Success 7.0%
+Step 475000 | Q1 32.75 | Q2 33.15 | LogP 3.69 | Alpha 0.0283
+Ep  950 | Steps  475500 | Avg    3.21 | Success 9.0%
+Step 480000 | Q1 40.14 | Q2 39.66 | LogP 4.56 | Alpha 0.0289
+Ep  960 | Steps  480500 | Avg    3.24 | Success 8.0%
+Step 485000 | Q1 31.37 | Q2 31.77 | LogP 3.90 | Alpha 0.0258
+Ep  970 | Steps  485500 | Avg    6.39 | Success 9.0%
+Step 490000 | Q1 39.50 | Q2 39.74 | LogP 4.15 | Alpha 0.0281
+Ep  980 | Steps  490500 | Avg    6.52 | Success 9.0%
+Step 495000 | Q1 30.56 | Q2 30.49 | LogP 4.46 | Alpha 0.0272
+Ep  990 | Steps  495500 | Avg    6.48 | Success 9.0%
+Step 500000 | Q1 33.82 | Q2 34.09 | LogP 3.66 | Alpha 0.0264
+Held-out success (best.pt): 5.0%
+
+Finished pbrs training | Steps: 500000 | Successes: 44

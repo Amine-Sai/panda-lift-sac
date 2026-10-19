@@ -1,7 +1,8 @@
+import sys
 import time
 
 import robosuite as suite
-from sac.train_sac import make_env
+from sac.train_sac import make_env, HORIZON
 from robosuite.wrappers import GymWrapper
 
 from sac.sac_torch import Agent
@@ -11,11 +12,10 @@ N_EVAL_EPISODES = 10
 
 
 env = make_env(
-    reward_shaping=False,
+    reward_mode="sparse",
     has_renderer=True,
     render_camera="frontview",
-    horizon=250,
-    control_freq=20,
+    control_freq=30,
 )
 
 print("Observation shape:", env.observation_space.shape)
@@ -28,7 +28,7 @@ agent = Agent(
 )
 
 try:
-    agent.load_models()
+    agent.load(sys.argv[1])
     print("Successfully loaded trained model.")
 except FileNotFoundError:
     print("Could not find model checkpoints.")
@@ -40,6 +40,7 @@ success_count = 0
 for ep in range(N_EVAL_EPISODES):
     obs = env.reset()
     done = False
+    success = False
     score = 0.0
 
     print(f"\n--- Starting Episode {ep + 1} ---")
@@ -55,13 +56,12 @@ for ep in range(N_EVAL_EPISODES):
         obs = next_obs
         score += reward
 
-        success = bool(env.unwrapped._check_success())
+        success = success or bool(env.unwrapped._check_success())
 
         if success:
-            success_count += 1
-            print(f"Episode {ep + 1}: SUCCESS")
             break
 
+    success_count += int(success)
     print(
         f"Episode {ep + 1} finished | "
         f"Score: {score:.3f} | "

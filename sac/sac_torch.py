@@ -1,3 +1,4 @@
+import os
 import torch as T
 import numpy as np
 import torch.nn.functional as F
@@ -6,32 +7,32 @@ from sac.networks import ActorNetwork, CriticNetwork
 
 
 class Agent():
-    def __init__(self, input_dims, n_actions, alpha=3e-4, beta=1e-4, tau=5e-3,
+    def __init__(self, input_dims, n_actions, actor_lr=3e-4, critic_lr=3e-4, tau=5e-3,
                  gamma=0.99, env=None, max_size=100_000, batch_size=128,
-                 reward_scale=1, auto_entropy=True, alpha_init=0.2):
+                 reward_scale=1, auto_entropy=True, alpha_init=0.2, alpha_lr=1e-4, seed=None):
         self.gamma = gamma
         self.tau = tau
-        self.memory = ReplayBuffer(max_size, input_dims, n_actions)
+        self.memory = ReplayBuffer(max_size, input_dims, n_actions, seed)
         self.batch_size = batch_size
         self.n_actions = n_actions
         self.scale = reward_scale
 
-        self.actor = ActorNetwork(alpha, input_dims, n_actions=n_actions,
+        self.actor = ActorNetwork(actor_lr, input_dims, n_actions=n_actions,
                     name='actor', max_action=env.action_space.high)
 
-        self.critic_1 = CriticNetwork(beta, input_dims, n_actions=n_actions, name='critic_1')
-        self.critic_2 = CriticNetwork(beta, input_dims, n_actions=n_actions, name='critic_2')
-        self.target_critic_1 = CriticNetwork(beta, input_dims, n_actions=n_actions, name='target_critic_1')
-        self.target_critic_2 = CriticNetwork(beta, input_dims, n_actions=n_actions, name='target_critic_2')
+        self.critic_1 = CriticNetwork(critic_lr, input_dims, n_actions=n_actions, name='critic_1')
+        self.critic_2 = CriticNetwork(critic_lr, input_dims, n_actions=n_actions, name='critic_2')
+        self.target_critic_1 = CriticNetwork(critic_lr, input_dims, n_actions=n_actions, name='target_critic_1')
+        self.target_critic_2 = CriticNetwork(critic_lr, input_dims, n_actions=n_actions, name='target_critic_2')
 
         self.update_network_parameters(tau=1)
 
         self.auto_entropy = auto_entropy
         if self.auto_entropy:
-            self.target_entropy = -0.5 * n_actions
-            self.log_alpha = T.zeros(1, requires_grad=True, device=self.actor.device)
-            self.alpha_optimizer = T.optim.Adam([self.log_alpha], lr=1e-4)
-            self.alpha = max(self.log_alpha.exp().item(), 0.05)
+            self.target_entropy = -float(n_actions)
+            self.log_alpha = T.full((1,), float(np.log(alpha_init)), requires_grad=True, device=self.actor.device)
+            self.alpha_optimizer = T.optim.Adam([self.log_alpha], lr=alpha_lr)
+            self.alpha = self.log_alpha.exp().item()
         else:
             self.alpha = alpha_init
 
@@ -44,18 +45,20 @@ class Agent():
             np.asarray([observation], dtype=np.float32),
              device=self.actor.device,
         )
-        actions, _ = self.actor.sample_normal(state, reparameterize=False)
-        return actions.cpu().detach().numpy()[0]
+        with T.no_grad():
+            actions, _ = self.actor.sample_normal(state, reparameterize=False)
+        return actions.cpu().numpy()[0]
 
     def choose_action_deterministic(self, observation):
         state = T.tensor(
             np.asarray([observation], dtype=np.float32),
             device=self.actor.device,
         )
-        mu, _ = self.actor.forward(state)
-        scale = T.as_tensor(self.actor.max_action, dtype=mu.dtype, device=self.actor.device)
-        action = T.tanh(mu) * scale
-        return action.cpu().detach().numpy()[0]
+        with T.no_grad():
+            mu, _ = self.actor.forward(state)
+            scale = T.as_tensor(self.actor.max_action, dtype=mu.dtype, device=self.actor.device)
+            action = T.tanh(mu) * scale
+        return action.cpu().numpy()[0]
 
     def remember(self, state, action, reward, new_state, done):
         self.memory.store_transition(state, action, reward, new_state, done)
@@ -70,21 +73,39 @@ class Agent():
             for target_param, param in zip(self.target_critic_2.parameters(), self.critic_2.parameters()):
                 target_param.copy_(tau * param.data + (1.0 - tau) * target_param.data)
 
-    def save_models(self):
-        print('saving models:')
-        self.actor.save_checkpoint()
-        self.critic_1.save_checkpoint()
-        self.critic_2.save_checkpoint()
-        self.target_critic_1.save_checkpoint()
-        self.target_critic_2.save_checkpoint()
+    def save(self, path, extra=None):
+        ckpt = {
+            "actor": self.actor.state_dict(),
+            "critic_1": self.critic_1.state_dict(),
+            "critic_2": self.critic_2.state_dict(),
+            "target_critic_1": self.target_critic_1.state_dict(),
+            "target_critic_2": self.target_critic_2.state_dict(),
+            "actor_opt": self.actor.optimizer.state_dict(),
+            "critic_1_opt": self.critic_1.optimizer.state_dict(),
+            "critic_2_opt": self.critic_2.optimizer.state_dict(),
+            "log_alpha": self.log_alpha.detach().cpu(),
+            "alpha_opt": self.alpha_optimizer.state_dict(),
+            "extra": extra or {},
+        }
+        tmp = path + ".tmp"
+        T.save(ckpt, tmp)
+        os.replace(tmp, path)
 
-    def load_models(self):
-        print('loading models:')
-        self.actor.load_checkpoint()
-        self.critic_1.load_checkpoint()
-        self.critic_2.load_checkpoint()
-        self.target_critic_1.load_checkpoint()
-        self.target_critic_2.load_checkpoint()
+    def load(self, path):
+        ckpt = T.load(path, map_location=self.actor.device, weights_only=False)
+        self.actor.load_state_dict(ckpt["actor"])
+        self.critic_1.load_state_dict(ckpt["critic_1"])
+        self.critic_2.load_state_dict(ckpt["critic_2"])
+        self.target_critic_1.load_state_dict(ckpt["target_critic_1"])
+        self.target_critic_2.load_state_dict(ckpt["target_critic_2"])
+        self.actor.optimizer.load_state_dict(ckpt["actor_opt"])
+        self.critic_1.optimizer.load_state_dict(ckpt["critic_1_opt"])
+        self.critic_2.optimizer.load_state_dict(ckpt["critic_2_opt"])
+        self.alpha_optimizer.load_state_dict(ckpt["alpha_opt"])
+        with T.no_grad():
+            self.log_alpha.copy_(ckpt["log_alpha"].to(self.actor.device))
+        self.alpha = self.log_alpha.exp().item()
+        return ckpt["extra"]
 
     def learn(self):
         if self.memory.mem_cntr < self.batch_size:
