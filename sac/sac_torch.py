@@ -162,7 +162,6 @@ class Agent():
 
         if self.auto_entropy:
             alpha_loss = -(self.log_alpha * (log_probs.detach() + self.target_entropy)).mean()
-
             self.alpha_optimizer.zero_grad()
             alpha_loss.backward()
             self.alpha_optimizer.step()

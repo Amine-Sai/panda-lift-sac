@@ -35,21 +35,31 @@ OBS_KEYS = [
 ]
 
 
-def make_env(reward_mode="sparse", horizon=HORIZON, control_freq=CONTROL_FREQ, **env_kwargs):
-    assert reward_mode in ("sparse", "native", "pbrs", "pbrs10")
-
+def make_env(
+    reward_mode="sparse",
+    horizon=HORIZON,
+    control_freq=CONTROL_FREQ,
+    has_offscreen_renderer=False,
+    camera_names="frontview",
+    camera_heights=480,
+    camera_widths=640,
+    **env_kwargs,
+):
+    assert reward_mode in ("sparse", "native", "pbrs")
     kwargs = dict(
-        robots=["Panda"],
-        controller_configs=suite.load_controller_config(default_controller="OSC_POSITION"),
-        use_camera_obs=False,
-        use_object_obs=True,
-        has_offscreen_renderer=False,
-        horizon=horizon,
-        control_freq=control_freq,
-        **env_kwargs,
-    )
-    if reward_mode in ("pbrs", "pbrs10"):
-        env = CustomLift(reward_shaping=False, pbrs_scale=10.0 if reward_mode == "pbrs10" else 1.0, **kwargs)
+    robots=["Panda"],
+    controller_configs=suite.load_controller_config(
+        default_controller="OSC_POSITION"
+    ),
+    use_camera_obs=False,
+    use_object_obs=True,
+    has_offscreen_renderer=has_offscreen_renderer,
+    horizon=horizon,
+    control_freq=control_freq,
+    **env_kwargs,
+)
+    if reward_mode == "pbrs":
+        env = CustomLift(reward_shaping=False, **kwargs)
     else:
         env = Lift(reward_shaping=(reward_mode == "native"), **kwargs)
     return GymWrapper(env, keys=OBS_KEYS)
@@ -218,7 +228,7 @@ def train(
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--mode", choices=["sparse", "native", "pbrs", "pbrs10"], required=True)
+    p.add_argument("--mode", choices=["sparse", "native", "pbrs"], required=True)
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--episodes", type=int, default=N_EPISODES)
     p.add_argument("--resume", action="store_true")

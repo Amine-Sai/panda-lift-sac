@@ -17,4 +17,4 @@ for path in sorted(glob.glob("runs_sac/*/eval.csv")):
 plt.xlabel("env steps")
 plt.ylabel("eval success (25 seeds)")
 plt.legend()
-plt.savefig("curves.png", dpi=150)
+plt.savefig("./results/curves.png", dpi=150)
